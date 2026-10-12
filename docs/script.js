@@ -1,5 +1,5 @@
 // Change this to your deployed API URL when you publish the backend.
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://mental-health-score-predictor-yze9.onrender.com";
 
 const form = document.getElementById("predict-form");
 const banner = document.getElementById("banner");
