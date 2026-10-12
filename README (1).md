@@ -4,10 +4,6 @@ Predicts a student's mental health score (out of 10, higher is better) from thei
 
 The project covers the full workflow: data cleaning, feature engineering, a scikit-learn preprocessing and Random Forest pipeline, a FastAPI REST API with input validation, and a web interface that calls the API and shows the result on a score dial.
 
-**Live demo:** [add link] | **API docs:** [add link]/docs
-
-![App screenshot](screenshots/app.png)
-
 > This model is trained on a student survey dataset and gives an estimate for learning and demonstration. It is not a medical or diagnostic tool.
 
 ## Features
@@ -29,7 +25,14 @@ The project covers the full workflow: data cleaning, feature engineering, a scik
 | Categorical | Platform, gender, academic level, purpose of use, grouped country: one-hot encoding (`handle_unknown="ignore"`) |
 | Model | Random Forest regressor inside a scikit-learn `Pipeline` |
 
-**Results (test set):** R² = [add], MAE = [add]. Linear regression baseline: R² = [add].
+**Results (test set, score scale 0 to 10):**
+
+| Model | Test R² | MAE | RMSE |
+|---|---|---|---|
+| Linear regression (baseline) | 0.74 | not recorded | not recorded |
+| Random Forest (deployed) | 0.88 | 0.35 | 0.46 |
+
+The Random Forest fits the training data more closely (train R² 0.98) than the test data (0.88), so it overfits somewhat. A tuned version (GridSearchCV, 72 parameter combinations) narrowed the gap (train 0.95, test 0.87) but did not beat the default on the test set, so the default model is the one used by the API.
 
 ## Project structure
 
@@ -133,4 +136,4 @@ Python, pandas, NumPy, scikit-learn, joblib, FastAPI, Pydantic, Uvicorn, HTML, C
 
 ## Dataset
 
-Student Social Media and Mental Health Impact dataset: [add source link].
+Student Social Media and Mental Health Impact dataset, included in this repository as a CSV file (5,000 rows).
